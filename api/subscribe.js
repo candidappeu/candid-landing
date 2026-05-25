@@ -1,4 +1,4 @@
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end();
   
   const { email } = req.body;
@@ -16,6 +16,7 @@ export default async function handler(req, res) {
   if (response.ok || response.status === 204) {
     res.status(200).json({ success: true });
   } else {
-    res.status(500).json({ error: 'Erreur Brevo' });
+    const err = await response.text();
+    res.status(500).json({ error: err });
   }
 }
