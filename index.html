@@ -932,20 +932,13 @@
     btn.disabled = true;
 
     try {
-      const res = await fetch('https://api.brevo.com/v3/contacts', {
+      const res = await fetch('/api/subscribe', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'api-key': 'eyJhcGlfa2V5IjoieGtleXNpYi1mYmM3ZmVlM2JjMGFjOWI3ZDQyODlkN2EyZGNlY2MxZWVjNmYyNDYyMGM1NDY5NTcyYTU3YmQ4YmRlNTZmNDUzLWVnRDlBejJMc1dDOHhRWGoifQ=='
-        },
-        body: JSON.stringify({
-          email: email,
-          listIds: [3],
-          updateEnabled: true
-        })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
       });
 
-      if (res.ok || res.status === 204) {
+      if (res.ok) {
         form.style.display = 'none';
         success.style.display = 'block';
       } else {
